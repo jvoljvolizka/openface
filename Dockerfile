@@ -34,5 +34,5 @@ RUN cd ~/openface && \
 
 RUN pip install Flask-API
 
-EXPOSE 8000 9000 4200
+EXPOSE 8000 9000 4200 5000
 CMD /bin/python '/root/openface/demos/faceapi.py'
