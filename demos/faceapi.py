@@ -4,7 +4,7 @@ from flask import request, url_for, send_from_directory, request
 from flask_api import FlaskAPI, status, exceptions
 from werkzeug import secure_filename
 import os
-
+import subprocess
 app = FlaskAPI(__name__)
 
 def create_new_folder(local_dir):
@@ -34,7 +34,8 @@ def notes_list():
         saved_path = os.path.join("/tmp/openface", img_name)
         app.logger.info("saving {}".format(saved_path))
         img.save(saved_path)
-        return send_from_directory("/tmp/openface",img_name, as_attachment=True)
+        out = subprocess.check_output("/bin/python2 /root/openface/demos/compare.py /tmp/openface/test2.jpeg /root/openface/target.jpeg")
+        return out
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0")
